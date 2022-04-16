@@ -30,7 +30,7 @@ export default function AccountsTable({ color,  values, setValues }) {
                 }
             >
                 
-                <div className="rounded-t mb-0 px-4 py-3 border-12 " style={{background:'#B9FCFB',textAlign:"center"}}>
+                <div className="rounded-t mb-0 px-4 py-3 border-12 " style={{background:'#42e0eb',textAlign:"center"}}>
                     <div className="flex flex-wrap items-center" >
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1 accountHeading" >
                             <h3 
@@ -121,7 +121,7 @@ export default function AccountsTable({ color,  values, setValues }) {
                                        
                                         <span 
                                             className={
-                                                "ml-3 font-bold " +
+                                                "ml-3 font-normal " +
                                                 +(color === "light" ? "text-blueGray-600" : "text-white")
                                             }
                                         >

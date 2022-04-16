@@ -1,0 +1,22 @@
+.box {
+    width: 360px;
+    box-shadow: 0 0 3px 0 rgba(160, 240, 239, 0.3);
+    text-align: center;
+    margin: 8% auto 0;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+}
+
+.box h1 {
+    color: black;
+    margin-bottom: 30px;
+    font-size: 25px;
+}
+
+.signin {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    box-shadow: 0 0 3px 0 rgba(160, 240, 239, 0.3);
+}

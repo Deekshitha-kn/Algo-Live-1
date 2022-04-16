@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch,Redirect } from "react-router-dom";
 import Admin from "./layouts/admin.js";
 import Auth from "./layouts/auth.js";
+
 function App() {
   return (
     <div className="App">

@@ -23,7 +23,7 @@ export default function StrategiesTable({ color, values, setValues }) {
       <div 
         className={ 
           " relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
-          (color === "light" ? "bg-white" : "bg-lightBlue-900 text-white")
+          (color === "light" ? "bg-white" : "bg-light text-dark")
         }
       >
         <div className="rounded-t mb-0 px-4 py-3 border-0 h3Heading" style={{textAlign:'center'}}>
@@ -33,9 +33,9 @@ export default function StrategiesTable({ color, values, setValues }) {
                 className={
                   "font-semibold text-lg " +
                   (color === "light" ? "text-blueGray-700" : "text-white")
-                }
+              }
               >
-                Strategies
+                STRATEGIES
               </h3>
             </div>
             <AddStrategy color={color} values={values} setValues={setValues} />
@@ -122,19 +122,19 @@ export default function StrategiesTable({ color, values, setValues }) {
               {strategies.length > 0 &&
                 strategies.map((account, index) => (
                   <tr key={account?._id}>
-                    <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
+                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                       <span
                         className={
-                          "ml-3 font-bold " +
+                          "ml-3 font-normal " +
                           +(color === "light"
-                            ? "text-blueGray-600"
+                            ? "bg-white"
                             : "text-white")
                         }
                       >
                         {index + 1}
                       </span>
-                    </th>
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                    </td>
+                    <td className="border-t px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                       {account.name}
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">

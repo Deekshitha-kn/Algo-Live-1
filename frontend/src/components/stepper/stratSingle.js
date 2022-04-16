@@ -73,7 +73,7 @@ export default function StratSingle({ values, setValues }) {
   }, []);
 
   return (
-    <Box sx={{ width: "100%", background: "black",height:'100vh'}} className="mainBox">
+    <Box sx={{ width: "100%", height:'100vh'}} className="mainBox">
       <div>
         <Grid container spacing={1}>
           <Grid item xs={6}>

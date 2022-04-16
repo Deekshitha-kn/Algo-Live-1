@@ -1,16 +1,13 @@
-
-.selectMenu{
+.selectMenu {
     background-color: white;
     margin-top: 0px;
     width: 70%;
     border-radius: 10px;
-    
 }
 
-.mainBox span{
+.mainBox span {
     font-family: serif;
-    font-size: 25px;
-    
-    color: white;
-     margin-left: 10px;
+    font-size: 15px;
+    color: black;
+    margin-left: 10px;
 }

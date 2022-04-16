@@ -1,4 +1,3 @@
-
 const instrumentID = require("../data/instrumentID.js");
 const fetch = require("node-fetch");
 const params = require("../models/params.js");
@@ -55,20 +54,20 @@ async function waitForXseconds(x) {
 
 function fetchCandlesData(instrument, timeframe, fromDate, toDate) {
     // console.log(instrument, fromDate, toDate, timeframe)
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
 
         try {
             // difference b/w fromDate and ToDate < 60Days
             let instrumentID = await getInstrumentID(instrument);
             let paramsObj = await getParams();
-            
+
             let userID = paramsObj.userID;
             let apikey = paramsObj.apikey;
             let accesstoken = paramsObj.accesstoken;
             // let x = parseDate(fromDate);
             // console.log(fromDate.getFullYear(), timeframe, instrumentID);
             let url = "https://api.kite.trade/instruments/historical/" + instrumentID.toString() + "/" + timeframe.toString() + "?user_id=" + userID.toString() + "&oi=1&from=" + parseDate(fromDate) + "&to=" + parseDate(toDate);
-        
+
 
             let res = await fetch(url, {
                 method: "GET",
@@ -79,7 +78,7 @@ function fetchCandlesData(instrument, timeframe, fromDate, toDate) {
 
 
             res = await res.json();
-          
+
             if (res.status == "success") {
                 resolve(res['data']['candles']);
             } else {
@@ -98,11 +97,11 @@ function fetchCandlesData(instrument, timeframe, fromDate, toDate) {
 function getTodaysCandle(instrument, timeframe) {
 
     logger.info({ "function": " getCandles(" + candlesCount + ")", "instrument": instrument, "timeframe": timeframe });
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
 
 
         let today = new Date();
-        
+
 
         try {
             //-------------------Fetching Reuired Candles of D/F Interval-----------------------------//
@@ -120,7 +119,7 @@ function getTodaysCandle(instrument, timeframe) {
 
 function waitForTime(entryHour, entryMinute, entrySecond) {
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
 
         while (1) {
             var dt = new Date();
@@ -144,7 +143,7 @@ function waitForTime(entryHour, entryMinute, entrySecond) {
 
 function getInstrumentID(instrument) {
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
         try {
             symb = instrument.split(":")[1];
             //logger.info(symb,instrumentID[symb]);
@@ -158,7 +157,7 @@ function getInstrumentID(instrument) {
 
 function findLTPthroughQuote(apiKey, accessToken, symbol) {
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
 
         var url = "https://api.kite.trade/quote/ltp/?&i=" + symbol; //   &i=NFO:BANKNIFTY20DECFUT ;  add this to url for each instrument
         var options = {
@@ -193,7 +192,7 @@ function getTokenList(apiKey, accessToken, instrumentList) {
         "INDIA VIX": 264969,
     }
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
 
         var url = "https://api.kite.trade/quote/?"; //   &i=NFO:NIFTY20D0312900CE ;  add this to url for each instrument
 
@@ -243,7 +242,7 @@ function getTokenList(apiKey, accessToken, instrumentList) {
 
 function checkToken(apiKey, accessToken) {
 
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
         var url = "https://api.kite.trade/quote/?i=NSE:RELIANCE"; //   &i=NFO:NIFTY20D0312900CE ;  add this to url for each instrument
         var options = {
             method: 'GET',
@@ -272,7 +271,7 @@ function checkToken(apiKey, accessToken) {
 }
 
 function getParams() {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
         try {
             var paramsObj = await params.findOne({});
             resolve(paramsObj);
@@ -294,8 +293,7 @@ async function getClientPositions(userID, apiKey, accessToken) {
         });
         if (positions) {
             res.json(positions);
-        }
-        else {
+        } else {
             res.json({ message: "Positions not found" });
         }
 
@@ -305,7 +303,7 @@ async function getClientPositions(userID, apiKey, accessToken) {
 }
 
 function getLTP(instrument) {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
         let url = LIVEPRICES_URL + "/api/LTP?instrument=" + instrument;
         try {
             let res = await fetch(url);
@@ -323,7 +321,7 @@ function getLTP(instrument) {
     })
 }
 
-async function placeTrade( account, userID, apiKey, accessToken, instrument, t_type, order_type, product, trigger_price, qty, price ) {
+async function placeTrade(account, userID, apiKey, accessToken, instrument, t_type, order_type, product, trigger_price, qty, price) {
     try {
         let order = await zerodhaTrade.placeTrade(
             userID,
@@ -336,7 +334,7 @@ async function placeTrade( account, userID, apiKey, accessToken, instrument, t_t
             trigger_price,
             qty,
             price,
-        
+
         );
         if (order) {
             let newTrade = {
@@ -363,8 +361,7 @@ async function placeTrade( account, userID, apiKey, accessToken, instrument, t_t
                 console.log("success")
             }
             res.json(order);
-        }
-        else {
+        } else {
             res.json({ message: "Order not placed" });
         }
     } catch (error) {
@@ -372,13 +369,12 @@ async function placeTrade( account, userID, apiKey, accessToken, instrument, t_t
     }
 }
 
-async function loginZerodha( userID, apiKey, pin, password, auth_type, secret, totp_secret ){
+async function loginZerodha(userID, apiKey, pin, password, auth_type, secret, totp_secret) {
     try {
         let login = await zerodhaLogin.getZerodhaAccessToken({ userID, apiKey, pin, password, auth_type, secret, totp_secret });
         if (login) {
             res.json(login);
-        }
-        else {
+        } else {
             res.json({ message: "Login Failed" });
         }
     } catch (error) {
